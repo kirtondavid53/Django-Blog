@@ -3,6 +3,7 @@ from .models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import PostForm
 
 # Create your views here.
 
@@ -33,3 +34,25 @@ def login_view(request):
             
 
     return render(request, 'login.html')
+
+def add_post(request):
+
+    if request.user.is_authenticated:
+        if request.method == "POST":  
+            form = PostForm(request.POST)  
+            if form.is_valid():  
+                try:  
+                    form.save() 
+                    model = form.instance
+                    messages.info(request, "Post has been added")
+                    return redirect('book-list')  
+                except:  
+                    messages.info(request, "There was an error please try again") 
+                    return render('add_post.html')
+        else:  
+            form = PostForm()  
+        return render(request,'add_post.html',{'form':form})  
+    else:
+        messages.info(request, "You must logged in to add a post")
+        return redirect('index')
+        

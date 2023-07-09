@@ -50,7 +50,14 @@
         </form>
         
         <!-- Left links -->
-  
+
+        {% if request.user.is_authenticated %}
+        <div class="d-flex align-items-center">
+          <a href="#" type="button" class="btn btn-link px-3 me-2">
+            Logout
+          </a>
+        </div>
+        {% else %}
         <div class="d-flex align-items-center">
           <a href="{% url 'login' %}" type="button" class="btn btn-link px-3 me-2">
             Login
@@ -65,6 +72,9 @@
             ><i class="fab fa-github"></i
           ></a>
         </div>
+        {% endif %}
+  
+        
       </div>
       <!-- Collapsible wrapper -->
     </div>
