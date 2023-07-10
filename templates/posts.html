@@ -1,32 +1,42 @@
-{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+{% extends 'base.html' %}
 
-    <title>Home Page</title>
-</head>
-<body>
- 
-</head>
-    <body>
-
-    <div class="header">
-        <h2>Tomi's Blog</h2>
-    </div>
-
+{% block content %}
+    
+<br><br>
     <div class="row">
-        <div class="leftcolumn">
-        <div class="card">
-            <h1>{{post.title}}</h1>
-            <h5>{{post.date_created}}</h5>
-            <p>{{post.body}}</p>
-            </a>
-        </div>
+        
+        <div class="col">
+            <a href="{% url 'index' %}" class="btn btn-primary">Back</a>
+            <br><br>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title" >{{post.title}}</h1>
+                    <h5>{{post.date_created}}</h5>
+                    <p>{{post.body}}</p>
+                    <a class="btn btn-primary" href="{% url 'update_post' post.id %}">Edit</a>
+                    <button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                        Delete
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this post?</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-mdb-dismiss="modal">Cancel</button>
+                            <a href="{% url 'delete_post' post.id %}" type="button" class="btn btn-danger">Yes</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </body>
-</html>
+
+
+{% endblock %}
