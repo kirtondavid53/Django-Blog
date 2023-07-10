@@ -45,7 +45,7 @@ def add_post(request):
                     form.save() 
                     model = form.instance
                     messages.info(request, "Post has been added")
-                    return redirect('book-list')  
+                    return redirect('index')  
                 except:  
                     messages.info(request, "There was an error please try again") 
                     return render('add_post.html')
