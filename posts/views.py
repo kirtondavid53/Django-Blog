@@ -43,13 +43,14 @@ def add_post(request):
             form = PostForm(request.POST)  
             if form.is_valid():  
                 try:  
-                    form.save() 
-                    model = form.instance
+                    item = form.save(commit=False)
+                    item.author = request.user
+                    item.save()
                     messages.info(request, "Post has been added")
                     return redirect('index')  
                 except:  
                     messages.info(request, "There was an error please try again") 
-                    return render('add_post.html')
+                    return redirect('add_post')
         else:  
             form = PostForm()  
         return render(request,'add_post.html',{'form':form})  
@@ -85,3 +86,8 @@ def delete_post(request, pk):
     messages.info(request, "Your post has been deleted")
     return redirect('index')
         
+
+@login_required(login_url="login")
+def logout_view(request):
+    logout(request)
+    return redirect('index')
