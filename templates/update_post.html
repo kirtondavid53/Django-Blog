@@ -3,6 +3,8 @@
 {% block content %}
 
 <br><br>
+
+{% if request.user.id == post.author.id %}
 <div class="card-body">
     <h4>Edit Post</h4>
     <form method="post">
@@ -14,5 +16,9 @@
     </form>
 </div>
 
+{% else %}
+    <h3>Please leave this page. You are not allowed here!!!</h3>
+    
+{% endif %}
 
 {% endblock %}
