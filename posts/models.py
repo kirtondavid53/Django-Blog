@@ -10,8 +10,12 @@ class Post(models.Model):
     body = RichTextField(blank=True, null=True)
     snippet = models.CharField(max_length=50, default='Click to read blog post')
     date_created = models.DateTimeField(default=datetime.now, blank=True)
+    likes = models.ManyToManyField(User, related_name='blogpost_like')
 
     def __str__(self):
-        return (f'{self.title}')
+        return (f'{self.title} | {str(self.author)}')
+    
+    def count_likes(self):
+        return self.likes.count()
 
 # Create your models here.

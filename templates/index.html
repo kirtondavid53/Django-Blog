@@ -19,7 +19,11 @@
                         <p>{{post.date_created}}</p>
                         <p>{{post.snippet|truncatewords:20 | safe }}</p>
                         </a>
+                
+                
+                {% if request.user.id == post.author.id %}
                 <a href="{% url 'update_post' post.id %}" class="btn btn-primary">Edit</a>
+                {% endif %}
                 </div>
             </div>
             <br>
