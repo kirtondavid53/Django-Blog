@@ -113,7 +113,7 @@ def delete_post(request, pk):
 
     post = Post.objects.get(id=pk)
 
-    if request.user == post.author.id:
+    if request.user.id == post.author.id:
 
         post.delete()
 
