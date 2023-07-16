@@ -1,1 +1,1 @@
-# Twitter-Clone
+# Django-Blog
